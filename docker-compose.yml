@@ -25,11 +25,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SITE_NAME}.entrypoints=http"
-#      - "traefik.http.routers.${SITE_NAME}.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.routers.${SITE_NAME}.rule=Host(`${SITE_DOMAIN}`)"
       - "traefik.http.middlewares.${SITE_NAME}-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.routers.${SITE_NAME}.middlewares=`$SITE_NAME`-https-redirect"
       - "traefik.http.routers.${SITE_NAME}-secure.entrypoints=https"
-#      - "traefik.http.routers.${SITE_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.routers.${SITE_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
       - "traefik.http.routers.${SITE_NAME}-secure.tls=true"
       - "traefik.http.routers.${SITE_NAME}-secure.tls.certresolver=http"
       - "traefik.http.routers.${SITE_NAME}-secure.service=$SITE_NAME"
