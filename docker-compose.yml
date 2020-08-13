@@ -55,5 +55,6 @@ services:
       
 networks:
   proxy:
-    external: true
+    external: 
+      name: proxy
   wordpress_net:
