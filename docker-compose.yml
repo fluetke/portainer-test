@@ -24,6 +24,7 @@ services:
 
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.${SITE_NAME}.service=$SITE_NAME"
       - "traefik.http.routers.${SITE_NAME}.entrypoints=http"
       - "traefik.http.routers.${SITE_NAME}.rule=Host(`${SITE_DOMAIN}`)"
       - "traefik.http.middlewares.${SITE_NAME}-https-redirect.redirectscheme.scheme=https"
