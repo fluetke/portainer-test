@@ -20,7 +20,7 @@ services:
       - /srv/docker-data/$SITE_NAME/www:/var/www/html
     networks:
       - proxy
-      - $SITE_NAME_net
+      - `$SITE_NAME`_net
 
     labels:
       - "traefik.enable=true"
@@ -37,7 +37,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: $SITE_NAME_db
+    container_name: `$SITE_NAME`_db
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -51,9 +51,9 @@ services:
     volumes:
       - /srv/docker-data/$SITE_NAME/db:/var/lib/mysql:rw
     networks:
-      - $SITE_NAME_net
+      - `$SITE_NAME`_net
 
 networks:
   proxy:
     external: true
-  $SITE_NAME_net:
+  `$SITE_NAME_net:
