@@ -3,7 +3,7 @@ services:
 
   wordpress:
     image: wordpress:latest
-    container_name: $SITE_NAME
+    container_name: $STACKNAME
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
