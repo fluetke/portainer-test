@@ -20,7 +20,7 @@ services:
       - /srv/docker-data/${SITE_NAME}/www:/var/www/html
     networks:
       - proxy
-#      - ${SITE_NAME}_net
+      - ${SITE_NAME}_net
 
     labels:
       - "traefik.enable=true"
