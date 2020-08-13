@@ -56,4 +56,4 @@ services:
 networks:
   proxy:
     external: true
-#  ${SITE_NAME}_net:
+  ${SITE_NAME}_net:
