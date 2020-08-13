@@ -2,7 +2,6 @@ version: '2'
 services:
 
   wordpress:
-  test-service:
     image: wordpress:latest
     container_name: $SITE_NAME
     restart: unless-stopped
