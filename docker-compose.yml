@@ -1,5 +1,60 @@
 version: '2'
 services:
+
+  wordpress:
   test-service:
     image: wordpress:latest
     container_name: $SITE_NAME
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+        - 80
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - /srv/docker-data/$SITE_NAME/www:/var/www/html
+    networks:
+      - proxy
+      - $SITE_NAME_net
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.`$SITE_NAME`.entrypoints=http"
+      - "traefik.http.routers.`$SITE_NAME`.rule=Host(`$SITE_DOMAIN`)"
+      - "traefik.http.middlewares.`$SITE_NAME`-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.`$SITE_NAME`.middlewares=`$SITE_NAME`-https-redirect"
+      - "traefik.http.routers.`$SITE_NAME`-secure.entrypoints=https"
+      - "traefik.http.routers.`$SITE_NAME`-secure.rule=Host(`$SITE_DOMAIN`)"
+      - "traefik.http.routers.`$SITE_NAME`-secure.tls=true"
+      - "traefik.http.routers.`$SITE_NAME`-secure.tls.certresolver=http"
+      - "traefik.http.routers.`$SITE_NAME`-secure.service=`$SITE_NAME`"
+      - "traefik.docker.network=proxy"
+
+  db:
+    image: mysql:5.7
+    container_name: $SITE_NAME_db
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - /srv/docker-data/$SITE_NAME/db:/var/lib/mysql:rw
+    networks:
+      - $SITE_NAME_net
+
+networks:
+  proxy:
+    external: true
+  $SITE_NAME_net:
