@@ -24,7 +24,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      #- "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.service=$COMPOSE_PROJECT_NAME"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.service=$COMPOSE_PROJECT_NAME"
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.entrypoints=http"
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.rule=Host(`${SITE_DOMAIN}`)"
       - "traefik.http.middlewares.wordpress-${COMPOSE_PROJECT_NAME}-https-redirect.redirectscheme.scheme=https"
