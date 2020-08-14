@@ -24,16 +24,16 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.service=$COMPOSE_PROJECT_NAME"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=http"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${SITE_DOMAIN}`)"
-      - "traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=${COMPOSE_PROJECT_NAME}-https-redirect"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.entrypoints=https"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.tls=true"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.tls.certresolver=http"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.service=$COMPOSE_PROJECT_NAME"
+      #- "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.service=$COMPOSE_PROJECT_NAME"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.entrypoints=http"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.middlewares.wordpress-${COMPOSE_PROJECT_NAME}-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.middlewares=${COMPOSE_PROJECT_NAME}-https-redirect"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.entrypoints=https"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls=true"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls.certresolver=http"
+      - "traefik.http.routers.wordpress${COMPOSE_PROJECT_NAME}-secure.service=$COMPOSE_PROJECT_NAME"
       - "traefik.docker.network=proxy"
 
   db:
