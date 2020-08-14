@@ -33,7 +33,7 @@ services:
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls=true"
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls.certresolver=http"
-      - "traefik.http.routers.wordpress${COMPOSE_PROJECT_NAME}-secure.service=$COMPOSE_PROJECT_NAME"
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.service=$COMPOSE_PROJECT_NAME"
       - "traefik.docker.network=proxy"
 
   db:
