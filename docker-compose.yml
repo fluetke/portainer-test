@@ -3,7 +3,7 @@ services:
 
   wordpress:
     image: wordpress:latest
-    container_name: $STACKNAME
+    #container_name: $STACKNAME
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -17,28 +17,28 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     volumes:
-      - /srv/docker-data/${SITE_NAME}/www:/var/www/html
+      - /srv/docker-data/${COMPOSE_PROJECT_NAME}/www:/var/www/html
     networks:
       - proxy
       - wordpress_net
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${SITE_NAME}.service=$SITE_NAME"
-      - "traefik.http.routers.${SITE_NAME}.entrypoints=http"
-      - "traefik.http.routers.${SITE_NAME}.rule=Host(`${SITE_DOMAIN}`)"
-      - "traefik.http.middlewares.${SITE_NAME}-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.${SITE_NAME}.middlewares=${SITE_NAME}-https-redirect"
-      - "traefik.http.routers.${SITE_NAME}-secure.entrypoints=https"
-      - "traefik.http.routers.${SITE_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
-      - "traefik.http.routers.${SITE_NAME}-secure.tls=true"
-      - "traefik.http.routers.${SITE_NAME}-secure.tls.certresolver=http"
-      - "traefik.http.routers.${SITE_NAME}-secure.service=$SITE_NAME"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.service=$COMPOSE_PROJECT_NAME"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=http"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=${COMPOSE_PROJECT_NAME}-https-redirect"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.entrypoints=https"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.tls=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.tls.certresolver=http"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-secure.service=$COMPOSE_PROJECT_NAME"
       - "traefik.docker.network=proxy"
 
   db:
     image: mysql:5.7
-    container_name: ${SITE_NAME}_db
+    container_name: ${COMPOSE_PROJECT_NAME}_db
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -50,7 +50,7 @@ services:
       MYSQL_PASSWORD: wordpress
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - /srv/docker-data/$SITE_NAME/db:/var/lib/mysql:rw
+      - /srv/docker-data/$COMPOSE_PROJECT_NAME/db:/var/lib/mysql:rw
     networks:
       - wordpress_net
       
