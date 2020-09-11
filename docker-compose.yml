@@ -22,7 +22,9 @@ services:
       - proxy
       - wordpress_net
     command:
-      echo "file_upload = On\nupload_max_file_size = 256M\npost_max_size = 256M" > /usr/local/etc/php/conf.d/uploads.ini
+      echo "file_upload = On" > /usr/local/etc/php/conf.d/uploads.ini
+      echo "upload_max_file_size = 256M" >> /usr/local/etc/conf.d/uploads.ini
+      echo "post_max_size = 256M" >> /usr/local/etc/php/conf.d/uploads.ini
 
     labels:
       - "traefik.enable=true"
