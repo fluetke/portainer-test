@@ -22,7 +22,7 @@ services:
       - proxy
       - wordpress_net
     command:
-      /bin/sh -c "echo file_upload = On\nupload_max_file_size = 256M\npost_max_size = 256M > /usr/local/etc/php/conf.d/uploads.ini && exec nginx -g 'daemon off;'"
+      /bin/sh -c "echo file_upload = On\nupload_max_file_size = 256M\npost_max_size = 256M > /usr/local/etc/php/conf.d/uploads.ini && exec /usr/bin/nginx -g 'daemon off;'"
 
     labels:
       - "traefik.enable=true"
