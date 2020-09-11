@@ -1,4 +1,4 @@
-version: '2'
+version: '3.3'
 services:
 
   wordpress:
@@ -18,10 +18,12 @@ services:
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - /srv/docker-data/${COMPOSE_PROJECT_NAME}/www:/var/www/html
-      - ./php-conf:/usr/local/etc/php/conf.d
     networks:
       - proxy
       - wordpress_net
+    configs:
+      - source: php-upload-size
+        target: /usr/local/etc/php/conf.d/uploads.ini
 
     labels:
       - "traefik.enable=true"
@@ -64,3 +66,7 @@ networks:
     external: 
       name: proxy
   wordpress_net:
+  
+configs:
+  php-upload-size: 
+    file: ./php-conf/uploads.ini
