@@ -18,6 +18,7 @@ services:
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - /srv/docker-data/${COMPOSE_PROJECT_NAME}/www:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - proxy
       - wordpress_net
