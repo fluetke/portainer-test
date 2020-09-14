@@ -75,3 +75,7 @@ networks:
 configs:
   php-upload-size: 
     file: ./php-conf/uploads.ini
+
+volumes:
+  ${COMPOSE_PROJECT_NAME}_db:
+  ${COMPOSE_PROJECT_NAME}_www:
