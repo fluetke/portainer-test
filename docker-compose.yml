@@ -78,6 +78,6 @@ configs:
 
 volumes:
     db:
-      name: ${COMPOSE_PROJECT_NAME}_db
+      name: db-${COMPOSE_PROJECT_NAME}
     www:
-      name: ${COMPOSE_PROJECT_NAME}_www
+      name: www-${COMPOSE_PROJECT_NAME}
