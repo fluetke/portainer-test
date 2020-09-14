@@ -77,7 +77,7 @@ configs:
     file: ./php-conf/uploads.ini
 
 volumes:
-    db:
-      name: db-${COMPOSE_PROJECT_NAME}
-    www:
-      name: www-${COMPOSE_PROJECT_NAME}
+  db:
+    name: ${COMPOSE_PROJECT_NAME}_db
+  www:
+    name: ${COMPOSE_PROJECT_NAME}_www
