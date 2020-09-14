@@ -21,6 +21,9 @@ services:
     networks:
       - proxy
       - wordpress_net
+    deploy:
+      placement:
+        constraints: [node.role == manager]
     configs:
       - source: php-upload-size
         target: /usr/local/etc/php/conf.d/uploads.ini
@@ -60,6 +63,9 @@ services:
       - "${COMPOSE_PROJECT_NAME}_db:/var/lib/mysql:rw"
     networks:
       - wordpress_net
+    deploy:
+      placement:
+        constraints: [node.role == manager]
       
 networks:
   proxy:
