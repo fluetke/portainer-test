@@ -1,10 +1,10 @@
-version: '3.6'
+version: '3.3'
 services:
 
   wordpress:
     image: wordpress:latest
     #container_name: $COMPOSE_PROJECT_NAME
-    restart: unless-stopped
+    restart: always
     security_opt:
       - no-new-privileges:true
     ports:
@@ -62,10 +62,8 @@ services:
       - wordpress_net
       
 networks:
-  local:
-    proxy:
-      external: true
- #     name: proxy
+  proxy:
+    external: true
     wordpress_net:
   
 configs:
