@@ -64,7 +64,7 @@ services:
 networks:
   proxy:
     external: true
-    wordpress_net:
+  wordpress_net:
   
 configs:
   php-upload-size: 
