@@ -31,14 +31,14 @@ services:
       - "traefik.http.services.wordpress-${COMPOSE_PROJECT_NAME}.loadbalancer.passhostheader=true"
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.service=wordpress-${COMPOSE_PROJECT_NAME}"  # the router called wordpress-project will use a service called project
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.entrypoints=http" # the router wordpress-project will handle http traffic
-      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.rule=Host(`${SITE_DOMAIN}`)" # the router wordpress-project will handle traffic from domain SITE_DOMAIN
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.rule=Host(`${SITE_DOMAIN}`) || Host(`www.${SITE_DOMAIN}`)" # the router wordpress-project will handle traffic from domain SITE_DOMAIN
       
       - "traefik.http.middlewares.wordpress-${COMPOSE_PROJECT_NAME}-https-redirect.redirectscheme.scheme=https" # there will be a middleware called wordpress-project-https-redirect to secure http traffic
    
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.middlewares=wordpress-${COMPOSE_PROJECT_NAME}-https-redirect" # the router wordpress-project will make use of the middleware wordpress-project-https-redirect
       
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.entrypoints=https" # the router wordpress-project-secure will handle https
-      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`)" #the router wordpress-project-secure will handle SITE_DOMAIN
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`|| Host(`www.${SITE_DOMAIN}`))" #the router wordpress-project-secure will handle SITE_DOMAIN
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls=true" # the router wordpress-project-secure will use TLS
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls.certresolver=http" #the router will use a certificate resolver
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.service=wordpress-${COMPOSE_PROJECT_NAME}" #the router will use a service called project
