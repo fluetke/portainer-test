@@ -38,7 +38,7 @@ services:
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}.middlewares=wordpress-${COMPOSE_PROJECT_NAME}-https-redirect" # the router wordpress-project will make use of the middleware wordpress-project-https-redirect
       
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.entrypoints=https" # the router wordpress-project-secure will handle https
-      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`|| Host(`www.${SITE_DOMAIN}`))" #the router wordpress-project-secure will handle SITE_DOMAIN
+      - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.rule=Host(`${SITE_DOMAIN}`) || Host(`www.${SITE_DOMAIN}`)" #the router wordpress-project-secure will handle SITE_DOMAIN
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls=true" # the router wordpress-project-secure will use TLS
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.tls.certresolver=http" #the router will use a certificate resolver
       - "traefik.http.routers.wordpress-${COMPOSE_PROJECT_NAME}-secure.service=wordpress-${COMPOSE_PROJECT_NAME}" #the router will use a service called project
